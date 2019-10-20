@@ -4,8 +4,15 @@ from rest_framework import serializers
 from apps.shelves.models import Book, BookComment
 
 
-class BookTagsSerializer(serializers.ListSerializer):
-    child = serializers.CharField()
+class BookTagsSerializer(serializers.Serializer):
+    book_id = serializers.IntegerField(source='id', read_only=True)
+    tags = serializers.ListSerializer(child=serializers.CharField())
+
+    def create(self, validated_data):
+        book = Book.objects.get(id=self.context.get('book_id'))
+        for _tag in validated_data.get('tags'):
+            book.tags.get_or_create(text=_tag)
+        return book
 
 
 class BookCommentSerializer(serializers.ModelSerializer):
