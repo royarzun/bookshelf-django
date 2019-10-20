@@ -12,7 +12,7 @@ schema_view = get_schema_view(
       default_version='v1',
       description="A very simple bookshelf API",
       terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="royarzun@sgmail.com"),
+      contact=openapi.Contact(email="royarzun@gmail.com"),
       license=openapi.License(name="MIT License"),
    ),
    public=True,
