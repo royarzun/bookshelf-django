@@ -52,3 +52,7 @@ class BookSerializer(serializers.ModelSerializer):
             "tags"
         )
         read_only_fields = ("id", "created_at", "likes", "likes_count", "comments", "tags")
+
+
+class TagSuggestionsSerializer(serializers.ListSerializer):
+    child = serializers.CharField()
