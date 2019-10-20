@@ -1,0 +1,8 @@
+*.log
+*.pot
+*.pyc
+.idea
+.env
+__pycache__/
+books/settings/local.py
+books/db.sqlite3
