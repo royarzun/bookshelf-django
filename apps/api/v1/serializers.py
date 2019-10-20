@@ -35,7 +35,7 @@ class BookSerializer(serializers.ModelSerializer):
     comments = BookCommentSerializer(many=True, read_only=True)
     likes = BookLikeSerializer(many=True, read_only=True)
     likes_count = serializers.IntegerField(source="likes.count", read_only=True)
-    tags = BookTagsSerializer(read_only=True)
+    tags = serializers.ListSerializer(child=serializers.CharField(), read_only=True)
 
     class Meta:
         model = Book
