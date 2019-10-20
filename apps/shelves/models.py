@@ -11,6 +11,7 @@ class Book(models.Model):
     cover_img_url = models.CharField(max_length=256, blank=True)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    tags = models.ManyToManyField('shelves.Tag', related_name='books')
 
 
 class BookLike(models.Model):
