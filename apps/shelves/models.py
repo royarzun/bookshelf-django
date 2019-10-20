@@ -30,6 +30,10 @@ class BookComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
+class Tag(models.Model):
+    text = models.CharField(max_length=64, unique=True)
+
+
 class BookRequest(models.Model):
     requester = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.TextField(verbose_name=ugettext("BOOK_NAME"), blank=True)
