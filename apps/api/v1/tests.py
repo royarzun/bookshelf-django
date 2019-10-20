@@ -52,3 +52,18 @@ class TagsTestCase(APITestCase):
         self.book.refresh_from_db()
         self.assertEqual(status.HTTP_204_NO_CONTENT, response.status_code)
         self.assertEqual(self.book.tags.count(), 1)
+
+    def test_getting_tag_suggestions(self):
+        self.client.post(
+            reverse("book-tags-list", kwargs={"book_id": self.book.id}),
+            data=json.dumps({"tags": ["tag1", "tag2"]}),
+            content_type="application/json",
+        )
+        response = self.client.get(
+            reverse("suggestions-tags") + "?query=tag",
+        )
+        self.assertEqual(2, len(response.data))
+        response = self.client.get(
+            reverse("suggestions-tags") + "?query=tag1",
+        )
+        self.assertEqual(1, len(response.data))
