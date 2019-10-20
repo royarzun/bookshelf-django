@@ -21,5 +21,5 @@ schema_view = get_schema_view(
 urlpatterns = [
    url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
    path('', include('social_django.urls', namespace='social')),
-   path('api', include('apps.api.urls')),
+   path('api/', include('apps.api.urls')),
 ]
