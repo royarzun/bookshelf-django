@@ -8,14 +8,19 @@ from rest_framework.filters import BaseFilterBackend
 from rest_framework.mixins import (
     ListModelMixin,
     CreateModelMixin,
+    DestroyModelMixin,
     RetrieveModelMixin,
     UpdateModelMixin,
 )
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from apps.api.v1.serializers import BookSerializer, BookCommentSerializer
-from apps.shelves.models import Book
+from apps.api.v1.serializers import (
+    BookSerializer,
+    BookCommentSerializer,
+    BookTagsSerializer,
+)
+from apps.shelves.models import Book, Tag
 
 
 class BookFilterBackend(BaseFilterBackend):
@@ -51,6 +56,7 @@ class BookViewSet(
     RetrieveModelMixin,
     UpdateModelMixin,
 ):
+
     serializer_class = BookSerializer
     queryset = Book.objects.prefetch_related("likes", "comments")
     filter_backends = [BookFilterBackend]
@@ -99,4 +105,27 @@ class BookViewSet(
         comment = serializer.save()
         return Response(
             self.get_serializer(comment, context=self.get_serializer_context()).data
+        )
+
+
+class BookTagsViewSet(GenericViewSet, CreateModelMixin, DestroyModelMixin):
+    serializer_class = BookTagsSerializer
+    http_method_names = ["post", "delete"]
+    lookup_field = 'text'
+
+    def get_serializer_context(self):
+        return {"book_id": self.kwargs.get("book_id")}
+
+    def get_queryset(self):
+        return Book.objects.get(id=self.kwargs.get("book_id")).tags
+
+    def create(self, request, *args, **kwargs):
+        tags = BookTagsSerializer(
+            data=request.data, context=self.get_serializer_context()
+        )
+        tags.is_valid(raise_exception=True)
+        book = tags.save()
+
+        return Response(
+            data=BookTagsSerializer(book, context=self.get_serializer_context()).data
         )

@@ -11,6 +11,7 @@ class Book(models.Model):
     cover_img_url = models.CharField(max_length=256, blank=True)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    tags = models.ManyToManyField('shelves.Tag', related_name='books')
 
 
 class BookLike(models.Model):
@@ -29,6 +30,12 @@ class BookComment(models.Model):
     text = models.TextField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
+class Tag(models.Model):
+    text = models.CharField(max_length=64, unique=True)
+
+    def __str__(self):
+        return str(self.text)
 
 class BookRequest(models.Model):
     requester = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

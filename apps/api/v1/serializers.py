@@ -4,6 +4,17 @@ from rest_framework import serializers
 from apps.shelves.models import Book, BookComment
 
 
+class BookTagsSerializer(serializers.Serializer):
+    book_id = serializers.IntegerField(source='id', read_only=True)
+    tags = serializers.ListSerializer(child=serializers.CharField())
+
+    def create(self, validated_data):
+        book = Book.objects.get(id=self.context.get('book_id'))
+        for _tag in validated_data.get('tags'):
+            book.tags.get_or_create(text=_tag)
+        return book
+
+
 class BookCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookComment
@@ -24,6 +35,7 @@ class BookSerializer(serializers.ModelSerializer):
     comments = BookCommentSerializer(many=True, read_only=True)
     likes = BookLikeSerializer(many=True, read_only=True)
     likes_count = serializers.IntegerField(source="likes.count", read_only=True)
+    tags = BookTagsSerializer(read_only=True)
 
     class Meta:
         model = Book
@@ -36,6 +48,7 @@ class BookSerializer(serializers.ModelSerializer):
             "likes_count",
             "created_at",
             "comments",
-            "description"
+            "description",
+            "tags"
         )
-        read_only_fields = ("id", "created_at", "likes", "likes_count", "comments")
+        read_only_fields = ("id", "created_at", "likes", "likes_count", "comments", "tags")
