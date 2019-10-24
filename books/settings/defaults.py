@@ -11,6 +11,7 @@ ALLOWED_HOSTS = []
 
 GOOGLE_BOOKS_API_KEY = os.environ.get('GOOGLE_BOOKS_API_KEY')
 
+IOS_GOOGLE_CLIENT_ID = os.environ.get('IOS_GOOGLE_CLIENT_ID')
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
@@ -29,6 +30,7 @@ INSTALLED_APPS = [
     'apps.api',
     'apps.shelves',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_swagger',
     'drf_yasg',
     'social_django',
