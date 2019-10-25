@@ -1,5 +1,7 @@
 # -*- coding: utf8 -*-
 import json
+from unittest.mock import patch
+
 from django.urls import reverse
 from model_mommy import mommy
 from rest_framework import status
@@ -37,6 +39,25 @@ class TagsTestCase(APITestCase):
         self.book.refresh_from_db()
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(self.book.tags.count(), 2)
+
+    def test_auth(self):
+        self.client.logout()
+        with patch(
+                "apps.auth.ios.verify_oauth2_token",
+                return_value={
+                    "iss": "accounts.google.com",
+                    "email": "royarzun@gmail.com",
+                    "given_name": "a",
+                    "family_name": "b"
+                }
+        ) as verify_oauth2_token:
+            response = self.client.post(
+                "/auth/ios/token",
+                data=json.dumps({"token": "1"}),
+                content_type="application/json"
+            )
+            self.assertEqual(200, response.status_code)
+            self.assertTrue(verify_oauth2_token.called)
 
     def test_deleting_tag(self):
         response = self.client.post(

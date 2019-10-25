@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 from django.urls import path
-from apps.auth.ios import google_oauth as ios_googe_oauth
+from apps.auth.ios import IOSAuthToken
 
 urlpatterns = [
-    path(r'ios/token', ios_googe_oauth)
+    path(r'ios/token', IOSAuthToken.as_view())
 ]
