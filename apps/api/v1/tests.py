@@ -40,7 +40,7 @@ class TagsTestCase(APITestCase):
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(self.book.tags.count(), 2)
 
-    def test_auth(self):
+    def test_ios_auth(self):
         self.client.logout()
         with patch(
                 "apps.auth.ios.verify_oauth2_token",
@@ -58,6 +58,44 @@ class TagsTestCase(APITestCase):
             )
             self.assertEqual(200, response.status_code)
             self.assertTrue(verify_oauth2_token.called)
+
+    def test_generic_auth(self):
+        self.client.logout()
+        with patch(
+                "apps.auth.token.verify_oauth2_token",
+                return_value={
+                    "iss": "accounts.google.com",
+                    "email": "royarzun@gmail.com",
+                    "given_name": "a",
+                    "family_name": "b"
+                }
+        ) as verify_oauth2_token:
+            response = self.client.post(
+                "/auth/token?platform=flutter-ios",
+                data=json.dumps({"token": "1"}),
+                content_type="application/json"
+            )
+            self.assertEqual(200, response.status_code)
+            self.assertTrue(verify_oauth2_token.called)
+
+    def test_generic_auth_failing_on_unknown_platform(self):
+        self.client.logout()
+        with patch(
+                "apps.auth.token.verify_oauth2_token",
+                return_value={
+                    "iss": "accounts.google.com",
+                    "email": "royarzun@gmail.com",
+                    "given_name": "a",
+                    "family_name": "b"
+                }
+        ) as verify_oauth2_token:
+            response = self.client.post(
+                "/auth/token?platform=flutter-fuchsia",
+                data=json.dumps({"token": "1"}),
+                content_type="application/json"
+            )
+            self.assertEqual(400, response.status_code)
+            self.assertFalse(verify_oauth2_token.called)
 
     def test_deleting_tag(self):
         response = self.client.post(
