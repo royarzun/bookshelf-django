@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import AdminBookList from "../AdminBookList";
 import AdminUsers from "../AdminUsers";
 import AdminWhishList from "../AdminWhishList";
@@ -12,7 +13,15 @@ import {
 const Admin = () => {
   const { pathname } = useLocation();
   return (
-    <div className="flex w-3/4 border border-gray-200 rounded-md shadow-lg p-8 bg-white mx-auto mt-8">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: { opacity: 0, translateY: "100px" },
+        visible: { opacity: 1, translateY: 0 }
+      }}
+      className="flex w-3/4 border border-gray-200 rounded-md shadow-lg p-8 bg-white mx-auto mt-8"
+    >
       <ul className="mr-8 w-32 border-r-2 border-gray-200 p-4">
         <li>
           <Link
@@ -58,7 +67,7 @@ const Admin = () => {
           </Route>
         </Switch>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

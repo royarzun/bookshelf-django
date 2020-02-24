@@ -1,7 +1,12 @@
 import React from "react";
+import AnimatedSection from "../../components/AnimatedSection";
 
 const AdminUsers = () => {
-  return <p>Users</p>;
+  return (
+    <AnimatedSection>
+      <p>Users</p>
+    </AnimatedSection>
+  );
 };
 
 export default AdminUsers;
