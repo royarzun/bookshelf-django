@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch, Link, useLocation } from "react-router-dom";
 import AdminBookList from "../AdminBookList";
 import AdminUsers from "../AdminUsers";
 import AdminWhishList from "../AdminWhishList";
@@ -10,20 +10,42 @@ import {
 } from "../../constants/routes";
 
 const Admin = () => {
+  const { pathname } = useLocation();
   return (
-    <div>
-      <ul>
+    <div className="flex w-3/4 border border-gray-200 rounded-md shadow-lg p-8 bg-white mx-auto mt-8">
+      <ul className="mr-8 w-32 border-r-2 border-gray-200 p-4">
         <li>
-          <Link to={ADMIN_ALL_BOOKS}>All Books</Link>
+          <Link
+            className={`admin-item ${
+              pathname.includes(ADMIN_ALL_BOOKS) ? "active" : ""
+            }`}
+            to={ADMIN_ALL_BOOKS}
+          >
+            All Books
+          </Link>
         </li>
         <li>
-          <Link to={ADMIN_USERS}>Users</Link>
+          <Link
+            className={`admin-item ${
+              pathname.includes(ADMIN_USERS) ? "active" : ""
+            }`}
+            to={ADMIN_USERS}
+          >
+            Users
+          </Link>
         </li>
         <li>
-          <Link to={ADMIN_WHISHLIST}>Whishlist</Link>
+          <Link
+            className={`admin-item ${
+              pathname.includes(ADMIN_WHISHLIST) ? "active" : ""
+            }`}
+            to={ADMIN_WHISHLIST}
+          >
+            Whishlist
+          </Link>
         </li>
       </ul>
-      <div>
+      <div className="px-4 py-8">
         <Switch>
           <Route path={ADMIN_ALL_BOOKS}>
             <AdminBookList />

@@ -5,3 +5,11 @@
 .nav-item {
   @apply pl-4 text-gray-700 font-medium;
 }
+
+.admin-item {
+  @apply rounded-md p-2 mb-2 block;
+}
+.admin-item:hover,
+.admin-item.active {
+  @apply bg-gray-300;
+}
