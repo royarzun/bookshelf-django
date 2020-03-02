@@ -3,11 +3,17 @@
 @tailwind utilities;
 
 .nav-item {
-  @apply pl-4 text-gray-700 font-medium;
+  @apply pl-4 text-gray-200 font-medium;
 }
 
 .admin-item {
   @apply rounded-md p-2 mb-2 block font-semibold text-gray-800;
+}
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .admin-item:hover,
 .admin-item.active {

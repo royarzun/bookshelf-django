@@ -6,16 +6,13 @@ import Admin from "./pages/Admin";
 import Books from "./pages/Books";
 import NotFound from "./pages/NotFound";
 
-import Header from "./components/Header";
-
 import "./tailwind.css";
 
 const App = () => {
   return (
-    <main className="bg-gray-300 h-screen">
-      <div className="container mx-auto">
+    <main className="bg-gray-200 antialiased text-gray-900 min-h-screen">
+      <div>
         <Router>
-          <Header />
           <Switch>
             <Route path="/" exact>
               <Home />
