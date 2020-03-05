@@ -1,5 +1,6 @@
 # -*- coding: utf8 -*-
 from django.conf.urls import url
+from django.contrib import admin
 from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -25,7 +26,7 @@ urlpatterns = [
         name="schema-swagger-ui",
     ),
     path("", include("social_django.urls", namespace="social")),
-    path("", include("apps.shelves.urls", namespace="shelves")),
+    url(r"^admin/", admin.site.urls),
     path("api/", include("apps.api.urls")),
     path("auth/", include("apps.auth.urls")),
 ]
