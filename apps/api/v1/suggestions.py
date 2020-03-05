@@ -29,13 +29,10 @@ class TagSuggestionsFilterBackend(BaseFilterBackend):
 class TagSuggestionView(GenericViewSet):
     permission_classes = (IsAuthenticated, )
     filter_backends = (TagSuggestionsFilterBackend, )
+    serializer_class = TagSuggestionsSerializer
 
     def get_queryset(self):
         return Tag.objects.all()
-
-    def get_serializer_class(self):
-        if self.action == 'tags':
-            return TagSuggestionsSerializer
 
     def list(self, request, *args, **kwargs):
         tags = self.filter_queryset(self.get_queryset()).values_list('text', flat=True)

@@ -119,10 +119,10 @@ class TagsTestCase(APITestCase):
             content_type="application/json",
         )
         response = self.client.get(
-            reverse("suggestions-tags") + "?query=tag",
+            reverse("suggestions-list") + "?query=tag",
         )
         self.assertEqual(2, len(response.data))
         response = self.client.get(
-            reverse("suggestions-tags") + "?query=tag1",
+            reverse("suggestions-list") + "?query=tag1",
         )
         self.assertEqual(1, len(response.data))
