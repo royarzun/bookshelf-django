@@ -1,6 +1,5 @@
 # -*- coding: utf8 -*-
 from coreapi import Field
-from rest_framework.decorators import action
 from rest_framework.filters import BaseFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -38,7 +37,6 @@ class TagSuggestionView(GenericViewSet):
         if self.action == 'tags':
             return TagSuggestionsSerializer
 
-    @action(methods=["GET"], detail=False)
-    def tags(self, request, *args, **kwargs):
+    def list(self, request, *args, **kwargs):
         tags = self.filter_queryset(self.get_queryset()).values_list('text', flat=True)
         return Response(data=self.get_serializer(tags).data)
