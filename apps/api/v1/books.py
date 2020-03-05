@@ -20,7 +20,7 @@ from apps.api.v1.serializers import (
     BookCommentSerializer,
     BookTagsSerializer,
 )
-from apps.shelves.models import Book, Tag
+from apps.shelves.models import Book
 
 
 class BookFilterBackend(BaseFilterBackend):
