@@ -37,6 +37,7 @@ class Tag(models.Model):
     def __str__(self):
         return str(self.text)
 
+
 class BookRequest(models.Model):
     requester = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.TextField(verbose_name=ugettext("BOOK_NAME"), blank=True)
