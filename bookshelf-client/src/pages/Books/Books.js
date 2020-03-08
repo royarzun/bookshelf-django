@@ -21,7 +21,7 @@ const Books = () => {
 
   return (
     <WithHeader>
-      <ul className="max-w-screen-xl mx-auto my-12 flex flex-wrap justify-center">
+      <ul className="max-w-screen-xl mx-auto py-10 flex flex-wrap justify-center">
         {!isLoading
           ? books.map(book => (
               <li key={book.id} className="w-1/2 md:w-1/4">
@@ -30,7 +30,7 @@ const Books = () => {
             ))
           : [...new Array(16)].map((_book, index) => (
               <li key={index} className="w-1/2 md:w-1/4">
-                <Book placeholder />
+                <Book isPlaceholder />
               </li>
             ))}
       </ul>

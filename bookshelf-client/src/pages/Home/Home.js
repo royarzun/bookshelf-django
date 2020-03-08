@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { BOOKS } from "../../constants/routes";
 
 const Home = () => {
   return (
@@ -12,8 +14,8 @@ const Home = () => {
           </h1>
         </div>
         <div class="mt-6">
-          <button
-            type="submit"
+          <Link
+            to={BOOKS}
             class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-500 focus:outline-none focus:border-teal-700 focus:shadow-outline-teal active:bg-teal-700 transition duration-150 ease-in-out"
           >
             <span class="absolute left-0 inset-y pl-3">
@@ -30,7 +32,7 @@ const Home = () => {
               </svg>
             </span>
             Sign in
-          </button>
+          </Link>
         </div>
       </div>
     </div>

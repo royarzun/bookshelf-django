@@ -4,7 +4,7 @@ import { ADMIN_ALL_BOOKS, BOOKS, HOME } from "../../constants/routes";
 
 const Header = () => {
   return (
-    <header className="bg-teal-800">
+    <header className="bg-teal-800 shadow-lg">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl text-gray-800 flex font-semibold tracking-light">
           <Link to={HOME}>
@@ -13,7 +13,7 @@ const Header = () => {
                 📚
               </span>
             </span>
-            <span className="font-semibold text-white tracking-wide">
+            <span className="font-medium text-white tracking-wide">
               Bookshelf
             </span>
           </Link>
