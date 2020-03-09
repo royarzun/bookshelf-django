@@ -1,7 +1,9 @@
 module.exports = {
   theme: {
-    extend: {},
+    extend: {}
   },
-  variants: {},
-  plugins: [],
-}
+  variants: {
+    margin: ["responsive", "first", "last", "even", "odd", "hover", "focus"]
+  },
+  plugins: []
+};

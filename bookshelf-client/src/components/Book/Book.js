@@ -1,4 +1,5 @@
 import React from "react";
+import classnames from "classnames";
 
 const Book = ({
   id,
@@ -31,9 +32,12 @@ const Book = ({
         </p>
         <a
           href={`/books/${id}`}
-          className={isAvailable ? "btn" : "btn-disabled"}
+          className={classnames({
+            btn: isAvailable,
+            "btn-disabled": !isAvailable
+          })}
         >
-          Borrow
+          See Details
         </a>
       </div>
     </div>
@@ -56,7 +60,7 @@ const PlaceholderBook = () => {
           <span className="block bg-gray-400 h-4"></span>
         </p>
         <span className="px-4 py-2 bg-gray-400 text-gray-400 rounded-md">
-          Borrow
+          See Details
         </span>
       </div>
     </div>

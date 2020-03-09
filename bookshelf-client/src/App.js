@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import Books from "./pages/Books";
+import BookDetails from "./pages/BookDetails";
 import NotFound from "./pages/NotFound";
 
 import "./tailwind.css";
@@ -19,6 +20,9 @@ const App = () => {
             </Route>
             <Route path="/books" exact>
               <Books />
+            </Route>
+            <Route path="/books/:id" exact>
+              <BookDetails />
             </Route>
             <Route path="/admin">
               <Admin />

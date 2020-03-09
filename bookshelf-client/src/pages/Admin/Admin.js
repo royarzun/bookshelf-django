@@ -22,7 +22,7 @@ const Admin = () => {
           hidden: { opacity: 0, translateY: "100px" },
           visible: { opacity: 1, translateY: 0 }
         }}
-        className="flex w-3/4 border border-gray-200 rounded-md shadow-lg p-8 bg-white mx-auto mt-8"
+        className="flex w-3/4 border border-gray-200 rounded-lg shadow-lg p-8 bg-white mx-auto mt-8"
       >
         <ul className="mr-8 w-32 border-r-2 border-gray-200 p-4">
           <li>
